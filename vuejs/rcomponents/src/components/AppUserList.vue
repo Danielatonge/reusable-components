@@ -12,6 +12,9 @@
           />
           <div>
             <div>{{ item.name.first }}</div>
+
+            <slot></slot>
+            {{ secondrow(item) }}
           </div>
         </div>
       </li>

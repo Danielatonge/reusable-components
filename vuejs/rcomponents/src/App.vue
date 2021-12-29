@@ -2,7 +2,7 @@
   <AppLayout>
     <template #header> Slots are awesome </template>
     <template #default>
-      <AppUserList>
+      <AppUserList :secondrow="(name) => name.email">
         <template #loading>
           <AppSpinner> </AppSpinner>
         </template>
