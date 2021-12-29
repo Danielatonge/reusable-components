@@ -1,24 +1,13 @@
 # rcomponents
 
-## Project setup
-```
-npm install
-```
+## Component
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Using Slots
+Named Slots
+Create a User List Component
+Fake Scoped Slots with Functions
+Refactor User List Component Using Slots
+Passing Data to the Parent Using Scoped Slot
+Using Scoped Slots with Functions
+Composing Components
+Dynamic Named Slots
