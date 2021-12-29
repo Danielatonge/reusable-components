@@ -1,11 +1,9 @@
 <template>
-  <button>{{ text }}</button>
+  <button><slot></slot></button>
 </template>
 
 <script>
-export default {
-  props: ["text"]
-};
+export default {};
 </script>
 
 <style scoped></style>

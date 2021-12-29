@@ -1,5 +1,5 @@
 <template>
-  <AppButton text="CLICK"></AppButton>
+  <AppButton>CLICK</AppButton>
 </template>
 
 <script>
