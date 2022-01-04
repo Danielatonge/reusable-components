@@ -2,7 +2,7 @@
   <section>
     <slot name="title"> Users</slot>
     <ul class="userlist" v-if="state === 'loaded'">
-      <li v-for="item in data.results" :key="item.email">
+      <li v-for="item in data" :key="item.email">
         <div>
           <img
             width="48"
@@ -12,9 +12,7 @@
           />
           <div>
             <div>{{ item.name.first }}</div>
-
-            <slot></slot>
-            {{ secondrow(item) }}
+            <slot name="secondrow" :remove="remove" :item="item"></slot>
           </div>
         </div>
       </li>
@@ -23,30 +21,28 @@
     <slot v-if="state === 'failed'" name="error">
       Oops, something went wrong
     </slot>
+    {{ state }}
   </section>
 </template>
 
 <script>
+import axios from "axios";
+
 const states = {
   idle: "idle",
   loading: "loading",
   loaded: "loaded",
-  failed: "failed"
+  failed: "failed",
 };
 
 export default {
-  props: {
-    secondrow: {
-      type: Function,
-      default: () => {}
-    }
-  },
+  props: {},
   data() {
     return {
       state: "idle",
       data: undefined,
       error: undefined,
-      states
+      states,
     };
   },
   mounted() {
@@ -58,27 +54,24 @@ export default {
       this.error = undefined;
       this.data = undefined;
 
-      setTimeout(async () => {
-        try {
-          const response = await fetch("https://randomuser.me/api/?results=5");
-          const json = await response.json();
-          this.state = "loaded";
-          this.data = json;
-          return response;
-        } catch (error) {
-          console.error(error);
-          this.state = "failed";
-          this.error = error;
-          return error;
-        }
-      }, 1000);
+      try {
+        const response = await axios.get(
+          "https://randomuser.me/api/?results=5"
+        );
+        const json = await response.data.results;
+        console.log(json);
+        this.state = "loaded";
+        this.data = json;
+      } catch (error) {
+        console.error(error);
+        this.state = "failed";
+        this.error = error;
+      }
     },
     remove(item) {
-      this.data.results = this.data.results.filter(
-        (entry) => entry.email !== item.email
-      );
-    }
-  }
+      this.data = this.data.filter((entry) => entry.email !== item.email);
+    },
+  },
 };
 </script>
 

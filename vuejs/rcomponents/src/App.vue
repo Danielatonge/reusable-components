@@ -2,9 +2,12 @@
   <AppLayout>
     <template #header> Slots are awesome </template>
     <template #default>
-      <AppUserList :secondrow="(name) => name.email">
-        <template #loading>
+      <AppUserList>
+        <!-- <template #loading>
           <AppSpinner> </AppSpinner>
+        </template> -->
+        <template #secondrow="{ remove, item }">
+          <AppButton @click="remove(item)">{{ item.name.first }}</AppButton>
         </template>
       </AppUserList>
     </template>
@@ -12,24 +15,26 @@
 </template>
 
 <script>
-import AppSpinner from "@/components/AppSpinner";
+// import AppSpinner from "@/components/AppSpinner";
 // import Icon from "@/components/Icon";
 import AppLayout from "@/components/AppLayout";
+import AppButton from "@/components/AppButton";
 import AppUserList from "@/components/AppUserList";
 
 export default {
   name: "App",
   components: {
-    AppSpinner,
+    // AppSpinner,
     // Icon,
+    AppButton,
     AppLayout,
-    AppUserList
+    AppUserList,
   },
   methods: {
     log() {
       console.log("works");
-    }
-  }
+    },
+  },
 };
 </script>
 
