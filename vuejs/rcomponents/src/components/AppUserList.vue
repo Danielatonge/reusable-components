@@ -11,8 +11,16 @@
             :alt="item.name.first + ' ' + item.name.last"
           />
           <div>
-            <div>{{ item.name.first }}</div>
-            <slot name="secondrow" :remove="remove" :item="item"></slot>
+            <slot name="first" :text="item.name.first"></slot>
+            <slot name="last" :text="item.name.last"></slot>
+            <slot
+              name="full"
+              :text="`${item.name.first} ${item.name.last}`"
+            ></slot>
+            <slot
+              name="fullWithTitle"
+              :text="`${item.name.title} ${item.name.first} ${item.name.last}`"
+            ></slot>
           </div>
         </div>
       </li>

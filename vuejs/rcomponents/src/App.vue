@@ -1,24 +1,27 @@
 <template>
-  <AppLayout>
-    <template #header> Slots are awesome </template>
-    <template #default>
-      <AppUserList>
-        <!-- <template #loading>
-          <AppSpinner> </AppSpinner>
-        </template> -->
-        <template #secondrow="{ remove, item: user }">
-          <AppButton @click="remove(user)">{{ user.name.first }}</AppButton>
-        </template>
-      </AppUserList>
-    </template>
-  </AppLayout>
+  <div>
+    <select v-model="selected">
+      <option
+        v-for="option in options"
+        :key="option.value"
+        :value="option.value"
+      >
+        {{ option.label }}
+      </option>
+    </select>
+    <AppUserList>
+      <template #[selected]="{ text }">
+        <h4>{{ text }}</h4>
+      </template>
+    </AppUserList>
+  </div>
 </template>
 
 <script>
 // import AppSpinner from "@/components/AppSpinner";
 // import Icon from "@/components/Icon";
-import AppLayout from "@/components/AppLayout";
-import AppButton from "@/components/AppButton";
+// import AppLayout from "@/components/AppLayout";
+// import AppButton from "@/components/AppButton";
 import AppUserList from "@/components/AppUserList";
 
 export default {
@@ -26,14 +29,25 @@ export default {
   components: {
     // AppSpinner,
     // Icon,
-    AppButton,
-    AppLayout,
+    // AppButton,
+    // AppLayout,
     AppUserList,
   },
   methods: {
     log() {
       console.log("works");
     },
+  },
+  data() {
+    return {
+      selected: "first",
+      options: [
+        { value: "first", label: "first name" },
+        { value: "last", label: "last name" },
+        { value: "full", label: "full name" },
+        { value: "fullWithTitle", label: "full name with title" },
+      ],
+    };
   },
 };
 </script>
