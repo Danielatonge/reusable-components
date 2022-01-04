@@ -6,8 +6,8 @@
         <!-- <template #loading>
           <AppSpinner> </AppSpinner>
         </template> -->
-        <template #secondrow="{ remove, item }">
-          <AppButton @click="remove(item)">{{ item.name.first }}</AppButton>
+        <template #secondrow="{ remove, item: user }">
+          <AppButton @click="remove(user)">{{ user.name.first }}</AppButton>
         </template>
       </AppUserList>
     </template>
